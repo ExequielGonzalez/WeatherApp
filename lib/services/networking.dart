@@ -1,0 +1,22 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+class NetworkHelper {
+  String url;
+
+  NetworkHelper(this.url);
+
+  Future getData() async {
+    http.Response response;
+    response = await http.get(url);
+
+    if (response.statusCode == 200) {
+//      print(response.body);
+      String data = response.body;
+//      return data;
+      return jsonDecode(data);
+    } else {
+      print('something went wrong. Error: ${response.statusCode}');
+    }
+  }
+}
